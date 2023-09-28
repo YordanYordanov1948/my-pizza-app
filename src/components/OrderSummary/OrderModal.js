@@ -6,6 +6,21 @@ const OrderModal = ({ onClose, resetPizza }) => {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCVV] = useState('');
+
+  const handleAddCustomData = () => {
+    setName('John Doe');
+    setEmail('johndoe@example.com');
+    setPhone('123-456-7890');
+    setAddress('123 Main St, Springfield');
+    setPaymentMethod('card');
+    setCardNumber('4111 1111 1111 1111');
+    setExpiryDate('01/25');
+    setCVV('123');
+  };
+  
 
   const handleConfirmAndPay = () => {
     if (paymentMethod === 'card') {
@@ -24,7 +39,12 @@ const OrderModal = ({ onClose, resetPizza }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-8 rounded-lg w-1/2 shadow-lg">
         <button className="text-gray-600 hover:text-gray-900 absolute right-4 top-4" onClick={onClose}>Close</button>
-        <h2 className="text-2xl mb-4">Confirm Order</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl">Confirm Order</h2>
+          <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" onClick={handleAddCustomData}>
+            Add Custom Data
+          </button>
+        </div>
         
         {/* Inputs and Labels */}
         <div className="mb-4">
@@ -62,10 +82,28 @@ const OrderModal = ({ onClose, resetPizza }) => {
         {paymentMethod === 'card' && (
           <div className="mb-4">
             <div className="flex justify-between mb-2">
-              <input placeholder="Card Number" type="text" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2 mr-2" />
-              <input placeholder="Expiry Date" type="text" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2 ml-2" />
+              <input 
+                placeholder="Card Number" 
+                type="text"
+                value={cardNumber}
+                onChange={(e) => setCardNumber(e.target.value)} 
+                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2 mr-2" 
+              />
+              <input 
+                placeholder="Expiry Date" 
+                type="text"
+                value={expiryDate}
+                onChange={(e) => setExpiryDate(e.target.value)}
+                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2 ml-2" 
+              />
             </div>
-            <input placeholder="CVV" type="text" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/4" />
+            <input 
+              placeholder="CVV" 
+              type="text"
+              value={cvv}
+              onChange={(e) => setCVV(e.target.value)}
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/4" 
+            />
           </div>
         )}
         
@@ -77,6 +115,7 @@ const OrderModal = ({ onClose, resetPizza }) => {
             Confirm and Pay
           </button>
         </div>
+        
       </div>
     </div>
   );
