@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 const toppingPrices = {
   cheese: 1,
@@ -7,7 +7,6 @@ const toppingPrices = {
   pickles: 0.5,
   tomato: 1,
   basil: 2
-
 };
 
 // Helper function to count topping occurrences
@@ -19,14 +18,15 @@ const countToppings = (toppings) => {
   return counts;
 };
 
-const OrderSummary = ({ toppings, toggleModal }) => {
-
-  const toppingCounts = countToppings(toppings);
-
-  // Calculate the total price
-  const totalPrice = toppings.reduce((total, topping) => {
+const calculateTotalPrice = (toppings, toppingPrices) => {
+  return toppings.reduce((total, topping) => {
     return total + toppingPrices[topping.type];
   }, 0);
+};
+
+const OrderSummary = ({ toppings, setIsModalOpen }) => {
+  const toppingCounts = useMemo(() => countToppings(toppings), [toppings]);
+  const totalPrice = useMemo(() => calculateTotalPrice(toppings, toppingPrices), [toppings]);
 
   return (
     <div className="p-4 bg-white">
@@ -42,9 +42,9 @@ const OrderSummary = ({ toppings, toggleModal }) => {
       <div>
         <strong>Total: ${totalPrice.toFixed(2)}</strong>
       </div>
-      <button className="mt-4 bg-green-500 text-white px-6 py-2 rounded" onClick={toggleModal} >
+      <button className="mt-4 bg-green-500 text-white px-6 py-2 rounded" onClick={() => setIsModalOpen(true)}>
         Confirm Order
-      </button>
+    </button>
     </div>
   );
 };
