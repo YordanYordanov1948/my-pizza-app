@@ -2,6 +2,7 @@ import React from 'react';
 import Toppings from '../Toppings/Toppings';
 
 const HomePage = ({ toppings, setToppings }) => {
+  
 
   const addTopping = (type) => {
     const newTopping = {
@@ -31,16 +32,18 @@ const HomePage = ({ toppings, setToppings }) => {
               {/* Render the toppings */}
               {toppings.map((topping) => (
                   <div
-                    key={topping.id}
-                    style={{ left: `${topping.x}%`, top: `${topping.y}%` }}
-                    className={`absolute rounded-full 
-                      ${topping.type === 'cheese' ? 'bg-yellow-200 w-4 h-4' : ''} 
-                      ${topping.type === 'pepperoni' ? 'bg-red-600 w-5 h-5' : ''} 
-                      ${topping.type === 'olives' ? 'bg-gray-600 w-2 h-2' : ''} 
-                      ${topping.type === 'pickles' ? 'bg-green-700 w-2 h-2' : ''}`
-                    }
+                      key={topping.id}
+                      style={{ left: `${topping.x}%`, top: `${topping.y}%` }}
+                      className={`absolute rounded-full 
+                        ${topping.type === 'cheese' ? 'bg-yellow-200 w-4 h-4' : ''} 
+                        ${topping.type === 'pepperoni' ? 'bg-red-600 w-5 h-5' : ''} 
+                        ${topping.type === 'olives' ? 'bg-gray-600 w-2 h-2' : ''} 
+                        ${topping.type === 'pickles' ? 'bg-green-700 w-2 h-2' : ''} 
+                        ${topping.type === 'tomato' ? 'bg-red-400 w-5 h-5' : ''} 
+                        ${topping.type === 'basil' ? 'bg-green-600 w-2 h-6' : ''}`
+                      }
                   ></div>
-                ))}
+              ))}
             </div>
           </div>
         </div>

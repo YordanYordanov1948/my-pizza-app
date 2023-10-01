@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
-import HomePage from "./components/HomePage/HomePage";
-import Sidebar from "./components/Sidebar/Sidebar";
-import OrderSummary from "./components/OrderSummary/OrderSummary";
-import OrderModal from './components/OrderSummary/OrderModal';
-import './index.css';
+import HomePage from './components/HomePage/HomePage';
+import Sidebar from './components/Sidebar/Sidebar';
+import OrderSummary from './components/OrderSummary/OrderSummary';
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [toppings, setToppings] = useState([]);
 
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
   const resetPizza = () => setToppings([]);
+  
+  const setPizzaToppings = (newToppings) => {
+    setToppings(newToppings);
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar onReset={resetPizza} />
+      <Sidebar onReset={resetPizza} setPizzaToppings={setPizzaToppings} />
       <div className="flex-1">
         <HomePage toppings={toppings} setToppings={setToppings} />
       </div>
       <div className="flex-initial">
-        <OrderSummary toppings={toppings} toggleModal={toggleModal} />
+        <OrderSummary toppings={toppings} />
       </div>
-      {isModalOpen && <OrderModal onClose={toggleModal} toppings={toppings} resetPizza={resetPizza} />}
     </div>
   );
 }

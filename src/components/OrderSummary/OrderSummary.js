@@ -5,6 +5,9 @@ const toppingPrices = {
   pepperoni: 1.5,
   olives: 1,
   pickles: 0.5,
+  tomato: 1,
+  basil: 2
+
 };
 
 // Helper function to count topping occurrences
@@ -17,6 +20,7 @@ const countToppings = (toppings) => {
 };
 
 const OrderSummary = ({ toppings, toggleModal }) => {
+
   const toppingCounts = countToppings(toppings);
 
   // Calculate the total price
